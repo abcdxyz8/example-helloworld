@@ -30,6 +30,7 @@ async function getConfig(): Promise<any> {
 export async function getRpcUrl(): Promise<string> {
   try {
     const config = await getConfig();
+    // console.log("config:", config);
     if (!config.json_rpc_url) throw new Error('Missing RPC URL');
     return config.json_rpc_url;
   } catch (err) {
@@ -64,5 +65,6 @@ export async function createKeypairFromFile(
 ): Promise<Keypair> {
   const secretKeyString = await fs.readFile(filePath, {encoding: 'utf8'});
   const secretKey = Uint8Array.from(JSON.parse(secretKeyString));
+  // console.log("fromSecretKey: ",Keypair.fromSecretKey(secretKey));
   return Keypair.fromSecretKey(secretKey);
 }
